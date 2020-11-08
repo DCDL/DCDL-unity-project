@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2241532414912912502}
   - component: {fileID: 8948307092007084465}
   m_Layer: 0
-  m_Name: input_private_room_id
+  m_Name: input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
