@@ -14,11 +14,11 @@ jobs:
     #  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
     #  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
     #  UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-      
+  
     steps:
       #Checkout
       - name: Checkout repository
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           lfs: true
           
@@ -31,13 +31,13 @@ jobs:
       
       #Run tests (I don't have that huhuhu)
       - name: Run tests      
-      - uses: webbertakken/unity-builder@main
+        uses: webbertakken/unity-builder@main
         with:
           unityVersion: 2020.1.6f1
           
       # Build
       - name: Build project
-      - uses: webbertakken/unity-builder@v0.10
+        uses: webbertakken/unity-builder@v0.10
         with:
           unityVersion: 2020.1.6f1
           targetPlatform: WebGL
