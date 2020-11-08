@@ -11,7 +11,8 @@ public class GameMode : MonoBehaviour
     public string CurrentRoom { get; set; }
 
     Player_Selection MyPlayer_Selection;
-    Room_Selector MyRoom_Selector;
+    Room_Selection MyRoom_Selection;
+    Room MyRoom;
 
 
     public enum GameCanvas
@@ -28,9 +29,11 @@ public class GameMode : MonoBehaviour
         MyPlayer_Selection = GameCanvasObjects[0].GetComponent<Player_Selection>();
 
         //GameCanvasObjects.Add(GameObject.Find("canvas_room_selection"));
-        MyRoom_Selector = GameCanvasObjects[1].GetComponent<Room_Selector>();
+        MyRoom_Selection = GameCanvasObjects[1].GetComponent<Room_Selection>();
 
         //GameCanvasObjects.Add(GameObject.Find("canvas_room"));
+        MyRoom = GameCanvasObjects[2].GetComponent<Room>();
+
         SwitchCanvas(GameCanvas.PLAYERSELECTION);
     }
 
@@ -66,6 +69,13 @@ public class GameMode : MonoBehaviour
 
     public void StartRoom()
     {
-        MyRoom_Selector.StartRoom();
+        SwitchCanvas(GameMode.GameCanvas.ROOM);
+        MyRoom.Setup();
+        Debug.Log("Starting room " + CurrentRoom + " for player " + PlayerId);
+    }
+
+    public void NewGame()
+    {
+        MyRoom.NewGame();
     }
 }

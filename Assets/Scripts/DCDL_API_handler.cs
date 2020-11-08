@@ -10,7 +10,11 @@ public class DCDL_API_handler : MonoBehaviour
 
     public GameMode MyGameMode;
 
-    private bool IsOnline;
+
+    //This bools are set to true by callbacks so that the main thread knows it needs to do something.
+    private bool IsAllowedToConnect = false;
+    private bool IsGameAvailable = false;
+
     private string Endpoint;
     private QSocket Socket;
     private bool IsLocal = true;
@@ -48,7 +52,7 @@ public class DCDL_API_handler : MonoBehaviour
             if (message == "connected")
             {
                 Debug.Log("The backend has connected this player. Starting the room...");
-                MyGameMode.StartRoom();
+                IsAllowedToConnect = true;
             }
         });
 
@@ -59,7 +63,17 @@ public class DCDL_API_handler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(IsAllowedToConnect)
+        {
+            IsAllowedToConnect = false;
+            MyGameMode.StartRoom();
+        }
 
+        if(IsGameAvailable)
+        {
+            IsGameAvailable = true;
+            MyGameMode.NewGame();
+        }
     }
 
     private void OnDestroy()

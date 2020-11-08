@@ -4,7 +4,7 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Room_Selector : MonoBehaviour
+public class Room_Selection : MonoBehaviour
 {
     public Text PrivateRoomId;
 
@@ -51,12 +51,6 @@ public class Room_Selector : MonoBehaviour
 
     public void JoinWorldRoom()
     {
-
-    }
-
-    public void StartRoom()
-    {
-        MyGameMode.SwitchCanvas(GameMode.GameCanvas.ROOM);
-        Debug.Log("Starting room " + MyGameMode.CurrentRoom + " for player " + MyGameMode.PlayerId);
+        
     }
 }
