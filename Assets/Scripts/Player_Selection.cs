@@ -6,20 +6,22 @@ using UnityEngine.UI;
 
 public class Player_Selection : MonoBehaviour
 {
-    public DCDL_API_handler dCDL_API_Handler;
+    public GameMode MyGameMode;
+    public DCDL_API_handler MyDCDL_API_Handler;
     public Text PlayerIdText;
     public Text PasswordText;
+    private string PlayerId;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     async public void ConnectPlayer()
@@ -27,8 +29,19 @@ public class Player_Selection : MonoBehaviour
         string playerId = PlayerIdText.text;
         string password = PasswordText.text;
 
-        string body = "{\"playerId\" : \"" + playerId + "\",\"password\" : \"" + password + "\"}";
-        string response = await dCDL_API_Handler.PostRequest("/players", body);
-        Debug.Log("Reponse from the API : " + response);
+        bool connected = await MyDCDL_API_Handler.ConnectPlayer(playerId, password);
+
+        if (connected)
+        {
+            MyGameMode.PlayerId = playerId;
+            MyGameMode.Password = password;
+            Debug.Log("Player selected : " + playerId + ". Switching planel.");
+            MyGameMode.SwitchCanvas(GameMode.GameCanvas.ROOMSELECTION);
+        }
+
+        else
+        {
+            Debug.Log("Unable to connect.");
+        }
     }
 }

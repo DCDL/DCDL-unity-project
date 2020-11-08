@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Spacing: 40
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -163,7 +163,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_SizeDelta: {x: 160, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4929127053050247001
 CanvasRenderer:
@@ -206,7 +206,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player name
+  m_Text: Password
 --- !u!114 &8542786554149559211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,11 +288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 279548149506499153, guid: 551cc5568a4f63640969afb149479893, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 227
       objectReference: {fileID: 0}
     - target: {fileID: 279548149506499153, guid: 551cc5568a4f63640969afb149479893, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 78.59999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 279548149506499153, guid: 551cc5568a4f63640969afb149479893, type: 3}
       propertyPath: m_AnchorMin.x
@@ -394,11 +394,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3025906820733233348, guid: 6abf189b5674c624f9887ca424e32118, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 3025906820733233348, guid: 6abf189b5674c624f9887ca424e32118, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3025906820733233348, guid: 6abf189b5674c624f9887ca424e32118, type: 3}
       propertyPath: m_AnchorMin.x
@@ -427,10 +427,6 @@ PrefabInstance:
     - target: {fileID: 5878226602488368892, guid: 6abf189b5674c624f9887ca424e32118, type: 3}
       propertyPath: m_Name
       value: input_player_name
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948307092007084465, guid: 6abf189b5674c624f9887ca424e32118, type: 3}
-      propertyPath: m_PreferredWidth
-      value: 160
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6abf189b5674c624f9887ca424e32118, type: 3}
@@ -500,11 +496,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 279548149506499153, guid: 551cc5568a4f63640969afb149479893, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 227
       objectReference: {fileID: 0}
     - target: {fileID: 279548149506499153, guid: 551cc5568a4f63640969afb149479893, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 78.59999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 279548149506499153, guid: 551cc5568a4f63640969afb149479893, type: 3}
       propertyPath: m_AnchorMin.x
