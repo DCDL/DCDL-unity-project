@@ -16,6 +16,6 @@ jobs:
     # Upload artifact (Unity_v20XX.X.XXXX.alf)
     - name: Expose as artifact
       uses: actions/upload-artifact@v1
-     with:
-        name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-        path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+      with:
+          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
