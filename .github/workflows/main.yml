@@ -1,0 +1,57 @@
+name: Build and Release DCDL-unity
+on:
+  push: { branches: [master] }
+  release: { types: [published] }
+  
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  
+jobs:
+  build:
+    name: Build for WebGL
+    runs-on: ubuntu-latest
+    #env:
+    #  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+    #  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+    #  UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+  
+    steps:
+      #Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+          
+      #Cache
+      - uses: actions/cache@v1.1.0
+        with:
+          path: Library
+          key: Library
+          #restore-keys: Library-
+      
+      #Run tests (I don't have that huhuhu)
+      - name: Run tests      
+        uses: webbertakken/unity-builder@main
+        with:
+          unityVersion: 2020.1.6f1
+          
+      # Build
+      - name: Build project
+        uses: webbertakken/unity-builder@v0.10
+        with:
+          unityVersion: 2020.1.6f1
+          targetPlatform: WebGL
+
+      # Output
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Build
+          path: build
+        
+      #Azure deployment
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: node-rn
+          publish-profile: ${{ secrets.azureWebAppPublishProfile }}  
+  
