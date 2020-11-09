@@ -47,4 +47,11 @@ jobs:
         with:
           name: Build
           path: build
+        
+      #Azure deployment
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: node-rn
+          publish-profile: ${{ secrets.azureWebAppPublishProfile }}  
   
