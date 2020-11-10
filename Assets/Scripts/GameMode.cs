@@ -12,8 +12,7 @@ public class GameMode : MonoBehaviour
 
     Player_Selection MyPlayer_Selection;
     Room_Selection MyRoom_Selection;
-    Room MyRoom;
-
+    public Room MyRoom { get; private set; }
 
     public enum GameCanvas
     {
@@ -32,7 +31,7 @@ public class GameMode : MonoBehaviour
         MyRoom_Selection = GameCanvasObjects[1].GetComponent<Room_Selection>();
 
         //GameCanvasObjects.Add(GameObject.Find("canvas_room"));
-        MyRoom = GameCanvasObjects[2].GetComponent<Room>();
+        this.MyRoom = GameCanvasObjects[2].GetComponent<Room>();
 
         SwitchCanvas(GameCanvas.PLAYERSELECTION);
     }
