@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using SocketIOClient;
 using Newtonsoft.Json;
+using System.Globalization;
 //using System.Diagnostics;
 
 [Serializable]
@@ -21,17 +22,18 @@ public class DCDL_API_handler : MonoBehaviour
 
     public GameMode MyGameMode;
 
-
     //This bools are set to true by callbacks so that the main thread knows it needs to do something.
     private bool IsAllowedToConnect = false;
     private bool IsGameAvailable = false;
     private string NextSetId = "";
     private bool IsInNeedOfReconnexion = false;
     private bool IsAbleToReconnect = false;
+    private bool IsSetFinished = false;
 
     private string Endpoint;
     private SocketIO Socket;
     private bool IsLocal = true;
+
     // Start is called before the first frame update
     async void Start()
     {
@@ -49,8 +51,7 @@ public class DCDL_API_handler : MonoBehaviour
         {
             IsAllowedToConnect = false;
             MyGameMode.SwitchCanvas(GameMode.GameCanvas.ROOM);
-            MyGameMode.MyRoom.Setup();
-            Debug.Log("Starting room " + MyGameMode.CurrentRoom + " for player " + MyGameMode.PlayerId);
+            //Debug.Log("Starting room " + MyGameMode.CurrentRoom + " for player " + MyGameMode.PlayerId);
         }
 
         if (IsGameAvailable)
@@ -65,6 +66,12 @@ public class DCDL_API_handler : MonoBehaviour
             IsAbleToReconnect = false;
             await ConnectPlayerToRoom(MyGameMode.PlayerId, MyGameMode.Password, MyGameMode.CurrentRoom);
             Debug.Log("I tried to reconnect.");
+        }
+
+        if(IsSetFinished)
+        {
+           IsSetFinished = false;
+           MyGameMode.MyRoom.ConcludeSet();
         }
     }
 
@@ -113,10 +120,17 @@ public class DCDL_API_handler : MonoBehaviour
             NextSetId = data.GetValue<string>();
         });
 
+        Socket.On("GameOver", data =>
+        {
+            Debug.Log("GameOver received from the websocket : " + data.GetValue<string>());
+            IsSetFinished = true;
+        });
+
         Socket.On("stop", data =>
         {
             string str = data.GetValue<string>();
             Debug.Log("STOP received from the websocket : " + str);
+            MyGameMode.MyRoom.Stop();
         });
 
         Socket.OnConnected += async (sender, e) =>
@@ -175,6 +189,7 @@ public class DCDL_API_handler : MonoBehaviour
     public async Task<Set> GetSet(string setId)
     {
         string response = await GetRequest("/sets/" + setId);
+        Debug.Log("Response from getset : " + response);
         Set set = JsonConvert.DeserializeObject<Set>(response);
         return set;
     }
@@ -188,6 +203,7 @@ public class DCDL_API_handler : MonoBehaviour
         string body = JsonConvert.SerializeObject(action);
 
         var res = await PostRequest("/actions", body);
+        Debug.Log("action response : " + res);
         return res;
     }
 

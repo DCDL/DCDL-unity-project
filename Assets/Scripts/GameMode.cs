@@ -9,6 +9,7 @@ public class GameMode : MonoBehaviour
     public string PlayerId { get; set; }
     public string Password { get; set; }
     public string CurrentRoom { get; set; }
+    public string CurrentSet { get; set; }
 
     public Player_Selection MyPlayer_Selection { get; private set; }
     public Room_Selection MyRoom_Selection { get; private set; }
@@ -59,5 +60,21 @@ public class GameMode : MonoBehaviour
                 Debug.Log("Error : " + e);
             }
         }
+    }
+
+    void DisplayRoomSelection()
+    {
+        SwitchCanvas(GameMode.GameCanvas.ROOMSELECTION);
+        CurrentRoom = "";
+        CurrentSet = "";
+    }
+
+    void DisplayPlayerSelection()
+    {
+        SwitchCanvas(GameMode.GameCanvas.PLAYERSELECTION);
+        CurrentRoom = "";
+        CurrentSet = "";
+        PlayerId = "";
+        Password = "";
     }
 }
