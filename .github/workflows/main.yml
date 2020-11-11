@@ -49,9 +49,17 @@ jobs:
           path: build
         
       #Azure deployment
-      - name: 'Run Azure webapp deploy action using publish profile credentials'
+      #- name: 'Run Azure webapp deploy action using publish profile credentials'
+      #  uses: azure/webapps-deploy@v2
+      #  with:
+      #    app-name: node-rn
+      #    publish-profile: ${{ secrets.azureWebAppPublishProfile }}  
+          
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: node-rn
-          publish-profile: ${{ secrets.azureWebAppPublishProfile }}  
+          app-name: 'dcdlunity'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+          package: ./published/
   
