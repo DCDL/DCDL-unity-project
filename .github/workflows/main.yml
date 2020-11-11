@@ -61,5 +61,5 @@ jobs:
           app-name: 'dcdlunity'
           slot-name: 'production'
           publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-          package: ./published/
+          package: ./build/
   
