@@ -30,10 +30,10 @@ jobs:
           #restore-keys: Library-
       
       #Run tests (I don't have that huhuhu)
-      - name: Run tests      
-        uses: webbertakken/unity-builder@main
-        with:
-          unityVersion: 2020.1.6f1
+      #- name: Run tests      
+      #  uses: webbertakken/unity-builder@main
+      #  with:
+      #    unityVersion: 2020.1.6f1
           
       # Build
       - name: Build project
