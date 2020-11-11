@@ -8,8 +8,8 @@ public class Player_Selection : MonoBehaviour
 {
     public GameMode MyGameMode;
     public DCDL_API_handler MyDCDL_API_Handler;
-    public Text PlayerIdText;
-    public Text PasswordText;
+    public InputField PlayerIdText;
+    public InputField PasswordText;
     private string PlayerId;
 
     // Start is called before the first frame update

@@ -10,8 +10,8 @@ public class GameMode : MonoBehaviour
     public string Password { get; set; }
     public string CurrentRoom { get; set; }
 
-    Player_Selection MyPlayer_Selection;
-    Room_Selection MyRoom_Selection;
+    public Player_Selection MyPlayer_Selection { get; private set; }
+    public Room_Selection MyRoom_Selection { get; private set; }
     public Room MyRoom { get; private set; }
 
     public enum GameCanvas
@@ -59,22 +59,5 @@ public class GameMode : MonoBehaviour
                 Debug.Log("Error : " + e);
             }
         }
-    }
-
-    public void SetPlayer(string playerId)
-    {
-        PlayerId = playerId;
-    }
-
-    public void StartRoom()
-    {
-        SwitchCanvas(GameMode.GameCanvas.ROOM);
-        MyRoom.Setup();
-        Debug.Log("Starting room " + CurrentRoom + " for player " + PlayerId);
-    }
-
-    public void NewGame()
-    {
-        MyRoom.NewGame();
     }
 }
