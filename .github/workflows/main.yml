@@ -41,6 +41,12 @@ jobs:
         with:
           unityVersion: 2020.1.6f1
           targetPlatform: WebGL
+          
+      - name: copy web.config file
+        uses: canastro/copy-file-action@master
+        with:
+          source: "web.config"
+          target: "build/WebGL/WebGL/web.config"
 
       # Output
       - uses: actions/upload-artifact@v1
@@ -61,5 +67,5 @@ jobs:
           app-name: 'dcdlunity'
           slot-name: 'production'
           publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-          package: build/WebGL/
+          package: build/WebGL/WebGL/
   
