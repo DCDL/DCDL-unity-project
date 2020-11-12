@@ -67,10 +67,10 @@ public class Room : MonoBehaviour
         ContainerSetParts.SetActive(true);
 
         //First, get this new game.
-        Debug.Log("Setting up a new game.");
+        Debug.LogError("Setting up a new game.");
         MyGameMode.CurrentSet = nextSetId;
         Set set = await MyDCDL_API_Handler.GetSet(nextSetId);
-        Debug.Log("The backend gave us the game " + JsonConvert.SerializeObject(set));
+        Debug.LogError("The backend gave us the game " + JsonConvert.SerializeObject(set));
 
         //setup the numbers or the letters into the parts
         List<string> options = set.question.Split(',').ToList();
@@ -108,11 +108,11 @@ public class Room : MonoBehaviour
         List<string> winners = new List<string>();
 
         Set set = await MyDCDL_API_Handler.GetSet(MyGameMode.CurrentSet);
-        Debug.Log(JsonConvert.SerializeObject(set));
+        Debug.LogError(JsonConvert.SerializeObject(set));
         List<PlayerInSet> players = set.playersInSet;
         if (players == null)
         {
-            Debug.Log("No one played this game...");
+            Debug.LogError("No one played this game...");
             return;
         }
         foreach(PlayerInSet player in players)
@@ -168,7 +168,7 @@ public class Room : MonoBehaviour
         string message = InputMessageToSend.text;
         InputMessageToSend.text = "";
         string data = "{ \"playerId\" : \"" + playerId + "\",\"message\" : \"" + message + "\",\"roomId\" : \"" + MyGameMode.CurrentRoom + "\"}";
-        //Debug.Log("Sending message : " + data);
+        //Debug.LogError("Sending message : " + data);
         MyDCDL_API_Handler.SendMessageToSocket("serverchat", data);
         await MyDCDL_API_Handler.SendAction(MyGameMode.CurrentSet, playerId, message);
 
@@ -176,7 +176,7 @@ public class Room : MonoBehaviour
 
     public void DisplayChatMessage(string player, string message)
     {
-        //Debug.Log("New chat message : " + player + " said " + message);
+        //Debug.LogError("New chat message : " + player + " said " + message);
         List<string> fullmessage = new List<string>();
         fullmessage.Add(player);
         fullmessage.Add(message);

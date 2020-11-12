@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 288.80655, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &39674144
@@ -3447,6 +3447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyGameMode: {fileID: 1777033507}
   MyDCDL_API_Handler: {fileID: 1777033505}
+  ButtonReconnect: {fileID: 0}
   InputMessageToSend: {fileID: 1016888455}
   PrefabMessage: {fileID: 7700270676748642099, guid: c67d1e2a97dc9114ba8d275b325e008b, type: 3}
   ContainerMessages: {fileID: 39674142}

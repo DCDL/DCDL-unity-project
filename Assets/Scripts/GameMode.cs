@@ -57,7 +57,7 @@ public class GameMode : MonoBehaviour
             }
             catch (Exception e)
             {
-                Debug.Log("Error : " + e);
+                Debug.LogError("Error : " + e);
             }
         }
     }

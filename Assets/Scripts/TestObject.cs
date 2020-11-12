@@ -7,16 +7,16 @@ public class TestObject : MonoBehaviour {
   private QSocket socket;
 
   void Start () {
-    Debug.Log ("start");
+    Debug.LogError ("start");
     socket = IO.Socket ("http://localhost:3000");
 
     socket.On (QSocket.EVENT_CONNECT, () => {
-      Debug.Log ("Connected");
+      Debug.LogError ("Connected");
       socket.Emit ("chat", "test");
     });
 
     socket.On ("chat", data => {
-      Debug.Log ("data : " + data);
+      Debug.LogError ("data : " + data);
     });
   }
 

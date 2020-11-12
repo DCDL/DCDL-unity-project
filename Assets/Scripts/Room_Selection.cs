@@ -28,7 +28,7 @@ public class Room_Selection : MonoBehaviour
         string roomId = await MyDCDL_API_Handler.CreateRoom();
         if (roomId == "")
         {
-            Debug.Log("The room was not created");
+            Debug.LogError("The room was not created");
         }
         else
         {
@@ -45,7 +45,7 @@ public class Room_Selection : MonoBehaviour
             MyGameMode.CurrentRoom = roomId;
         }
 
-        Debug.Log("Trying to join room " + roomId);
+        Debug.LogError("Trying to join room " + roomId);
         bool success = await MyDCDL_API_Handler.ConnectPlayerToRoom(MyGameMode.PlayerId, MyGameMode.Password, roomId);
     }
 

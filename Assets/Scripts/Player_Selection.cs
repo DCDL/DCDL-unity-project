@@ -35,13 +35,13 @@ public class Player_Selection : MonoBehaviour
         {
             MyGameMode.PlayerId = playerId;
             MyGameMode.Password = password;
-            Debug.Log("Player selected : " + playerId + ". Switching planel.");
+            Debug.LogError("Player selected : " + playerId + ". Switching planel.");
             MyGameMode.SwitchCanvas(GameMode.GameCanvas.ROOMSELECTION);
         }
 
         else
         {
-            Debug.Log("Unable to connect.");
+            Debug.LogError("Unable to connect.");
         }
     }
 }
