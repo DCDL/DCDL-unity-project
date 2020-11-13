@@ -1,13 +1,11 @@
-﻿//This was taken from https://github.com/Rocher0724/socket.io-unity
-using Socket.Quobject.SocketIoClientDotNet.Client;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
 using System.Collections.Generic;
-using SocketIOClient;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Runtime.InteropServices;
 //using System.Diagnostics;
 
 [Serializable]
@@ -17,17 +15,13 @@ public class JsonMessage
     public string message;
 }
 
-public class BypassCertificate : CertificateHandler
-{
-    protected override bool ValidateCertificate(byte[] certificateData)
-    {
-        //Simply return true no matter what
-        return true;
-    }
-}
 
 public class DCDL_API_handler : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void EmitMessage(string title, string message);
+    [DllImport("__Internal")]
+    private static extern void ConnectWebSocket(string endpoint);
 
     public GameMode MyGameMode;
 
@@ -40,11 +34,10 @@ public class DCDL_API_handler : MonoBehaviour
     private bool IsSetFinished = false;
 
     private string Endpoint;
-    private SocketIO Socket;
     private bool IsLocal = false;
 
     // Start is called before the first frame update
-    async void Start()
+    void Start()
     {
         Debug.LogError("Starting the DCDL API handler...");
         if (!IsLocal)
@@ -77,94 +70,75 @@ public class DCDL_API_handler : MonoBehaviour
             Debug.LogError("I tried to reconnect.");
         }
 
-        if(IsSetFinished)
+        if (IsSetFinished)
         {
-           IsSetFinished = false;
-           MyGameMode.MyRoom.ConcludeSet();
+            IsSetFinished = false;
+            MyGameMode.MyRoom.ConcludeSet();
         }
     }
 
-    async Task StartSocket()
+    void WebSocketReceivedCONNECTION(string data)
     {
-
-        Socket = new SocketIO(Endpoint, new SocketIOOptions
+        Debug.LogError("Connection status received from the websocket : " + data);
+        if (data == "connected")
         {
-            Query = new Dictionary<string, string>
-                {
-                    {"room", MyGameMode.CurrentRoom },
-                }
-        });
+            Debug.LogError("The backend has connected this player. Starting the room...");
+            IsAllowedToConnect = true;
+        }
+    }
 
-        Socket.On("dclc", response =>
+    void WebSocketReceivedDCDL(string data)
+    {
+        Debug.LogError("DCLC status received from the websocket : " + data);
+        if (data == "connected")
         {
-            string text = response.GetValue<string>();
-            Debug.LogError("DCDL said : " + text);
-        });
+            Debug.LogError("The backend has connected this player. Starting the room...");
+        }
+    }
 
-        Socket.On("connection", response =>
-        {
-            string message = response.GetValue<string>();
-            //Debug.LogError("Connection status received from the websocket : " + message);
-            if (message == "connected")
-            {
-                Debug.LogError("The backend has connected this player. Starting the room...");
-                IsAllowedToConnect = true;
-            }
-        });
+    void WebSocketReceivedCLIENTCHAT(string data)
+    {
+        Debug.LogError("chat message received from the websocket : " + data);
+        var json = JsonUtility.FromJson<JsonMessage>(data);
+        string playerId = json.playerId;
+        string message = json.message;
+        MyGameMode.MyRoom.DisplayChatMessage(playerId, message);
+    }
 
-        Socket.On("clientchat", data =>
-        {
-            string str = data.GetValue<string>();
-            Debug.LogError("chat message received from the websocket : " + str);
-            var json = JsonUtility.FromJson<JsonMessage>(str);
-            string playerId = json.playerId;
-            string message = json.message;
-            MyGameMode.MyRoom.DisplayChatMessage(playerId, message);
-        });
+    void WebSocketReceivedGAMEAVAILABLE(string data)
+    {
+        Debug.LogError("Game received from the websocket : " + data);
+        IsGameAvailable = true;
+        NextSetId = data;
+    }
 
-        Socket.On("GameAvailable", data =>
-        {
-            Debug.LogError("Game received from the websocket : " + data.GetValue<string>());
-            IsGameAvailable = true;
-            NextSetId = data.GetValue<string>();
-        });
+    void WebSocketReceivedGAMEOVER(string data)
+    {
+        Debug.LogError("GameOver received from the websocket : " + data);
+        IsSetFinished = true;
+    }
 
-        Socket.On("GameOver", data =>
-        {
-            Debug.LogError("GameOver received from the websocket : " + data.GetValue<string>());
-            IsSetFinished = true;
-        });
-
-        Socket.On("stop", data =>
-        {
-            string str = data.GetValue<string>();
-            Debug.LogError("STOP received from the websocket : " + str);
-            MyGameMode.MyRoom.Stop();
-        });
-
-        Socket.OnConnected += async (sender, e) =>
-        {
-            //await Socket.EmitAsync("hi", ".net core");
-            Debug.LogError("Socket.IO connected");
-        };
-
-        Socket.OnReceivedEvent += async (sender, e) =>
-        {
-            //Debug.LogError("Event received : " + e);
-        };
-        await Socket.ConnectAsync();
+    void WebSocketReceivedSTOP(string data)
+    {
+        Debug.LogError("STOP received from the websocket : " + data);
+        MyGameMode.MyRoom.Stop();
+    }
+    void WebSocketReceivedIDLE(string data)
+    {
+        Debug.LogError("Idle received from the websocket : " + data);
     }
 
     private void OnDestroy()
     {
-        Socket.EmitAsync("disconnect");
+        SendMessageToSocket("disconnect","206");
         Debug.LogError("Destroying the socket.");
         //Socket.Disconnect();
     }
 
     public async Task<bool> ConnectPlayerToRoom(string playerId, string passwword, string roomId)
     {
-        await StartSocket();
+        Debug.Log("Connecting player to room");
+        ConnectWebSocket(Endpoint);
 
         string response = await GetRequest("/rooms/" + roomId);
 
@@ -175,7 +149,7 @@ public class DCDL_API_handler : MonoBehaviour
         }
 
         string socketMessage = playerId + ";" + passwword + ";" + roomId;
-        await Socket.EmitAsync("playerconnection", socketMessage);
+        SendMessageToSocket("playerconnection", socketMessage);
         return true;
     }
 
@@ -238,7 +212,7 @@ public class DCDL_API_handler : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error " + (int)(request.result) + " : " + request.error);
-            Debug.LogError("full error : " + request.ToString());
+            Debug.LogError("full error : " + request.downloadHandler.text);
             return "";
         }
         else
@@ -269,9 +243,9 @@ public class DCDL_API_handler : MonoBehaviour
         }
     }
 
-    public async void SendMessageToSocket(string title, string message)
+    public void SendMessageToSocket(string title, string message)
     {
-        await Socket.EmitAsync(title, message);
+        EmitMessage(title, message);
     }
 }
 

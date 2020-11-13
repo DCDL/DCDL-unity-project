@@ -1,0 +1,14 @@
+{
+  "name": "dcdl-unity",
+  "version": "1.0.0",
+  "description": "a frontend for DCDL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  }
+}
