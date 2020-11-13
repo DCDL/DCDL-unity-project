@@ -53,6 +53,9 @@ jobs:
         with:
           name: Build
           path: build
+
+      - name : Add web components
+        run : cp -r -v -i /website/ /build/
         
       #Azure deployment
       #- name: 'Run Azure webapp deploy action using publish profile credentials'
