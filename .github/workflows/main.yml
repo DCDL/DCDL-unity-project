@@ -41,6 +41,7 @@ jobs:
         with:
           unityVersion: 2020.1.6f1
           targetPlatform: WebGL
+          buildName: DCDL
           
       - name: copy web.config file
         uses: canastro/copy-file-action@master
