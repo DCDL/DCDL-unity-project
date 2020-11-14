@@ -57,7 +57,7 @@ jobs:
       - name : Add web components
         run : ls
         
-      - run : cp -r -v -i ./website/ /build/
+      - run : cp -r -v -i ./website ./build/
         
       #Azure deployment
       #- name: 'Run Azure webapp deploy action using publish profile credentials'
