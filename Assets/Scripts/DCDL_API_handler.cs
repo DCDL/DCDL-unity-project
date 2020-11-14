@@ -44,6 +44,8 @@ public class DCDL_API_handler : MonoBehaviour
             Endpoint = "https://dcdlbackend.azurewebsites.net";
         else
             Endpoint = "http://localhost:8080";
+
+        ConnectWebSocket(Endpoint);
     }
 
     // Update is called once per frame
@@ -138,7 +140,6 @@ public class DCDL_API_handler : MonoBehaviour
     public async Task<bool> ConnectPlayerToRoom(string playerId, string passwword, string roomId)
     {
         Debug.Log("Connecting player to room");
-        ConnectWebSocket(Endpoint);
 
         string response = await GetRequest("/rooms/" + roomId);
 
