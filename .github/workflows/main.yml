@@ -55,9 +55,9 @@ jobs:
           path: build
 
       - name : Add web components
-        run : run echo 'Trying to copy the website components'
         run : ls
-        run : cp -r -v -i ./website/ /build/
+        
+      - run : cp -r -v -i ./website/ /build/
         
       #Azure deployment
       #- name: 'Run Azure webapp deploy action using publish profile credentials'
