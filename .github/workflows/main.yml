@@ -48,16 +48,16 @@ jobs:
           source: "web.config"
           target: "build/WebGL/WebGL/web.config"
 
+      - name : Add web components
+        run : ls
+        
+      - run : cp -r -v -i ./website/ ./build/WebGL/WebGL/
+
       # Output
       - uses: actions/upload-artifact@v1
         with:
           name: Build
           path: build
-
-      #- name : Add web components
-      #  run : ls
-        
-      #- run : cp -r -v -i ./website/ ./build/
         
       #Azure deployment
       #- name: 'Run Azure webapp deploy action using publish profile credentials'
@@ -73,11 +73,3 @@ jobs:
           slot-name: 'production'
           publish-profile: ${{ secrets.azureWebAppPublishProfile }}
           package: build/WebGL/WebGL/
-  
-      - name: Deploy to Azure Web App - part 2
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'dcdlunity'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-          package: website/
