@@ -72,7 +72,7 @@
     };
     document.body.appendChild(script);
 
-        function ConnectWebSocket(endpoint)
+    function ConnectWebSocket(endpoint)
     {
       //window.alert("WORKING~!");
       socket = io(endpoint);
@@ -112,12 +112,13 @@
         //window.alert("Message received from dcdl : ~!" + data.toString());
         _unityInstance.SendMessage(GameMode, 'WebSocketReceivedIDLE', data.toString());
       });
-    }
+    })
+  }
 
-    function EmitMessage(title, message){
-      socket.emit(title, message)
-    }
+  function EmitMessage(title, message){
+    socket.emit(title, message)
+  }
 
-  </script>
+</script>
 </body>
 </html>
