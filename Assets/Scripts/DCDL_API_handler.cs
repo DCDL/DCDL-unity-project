@@ -171,6 +171,20 @@ public class DCDL_API_handler : MonoBehaviour
         return await PostRequest("/rooms", "");
     }
 
+    public async Task<RoomAPI> GetRoom(string roomId)
+    {
+        string response = await GetRequest("/rooms/" + roomId);
+        RoomAPI room = JsonConvert.DeserializeObject<RoomAPI>(response);
+        return room;
+    }
+
+    public async Task<PlayerAPI> GetPlayer(string playerId)
+    {
+        string response = await GetRequest("/players/" + playerId);
+        PlayerAPI player = JsonConvert.DeserializeObject<PlayerAPI>(response);
+        return player;
+    }
+
     public async Task<Set> GetSet(string setId)
     {
         string response = await GetRequest("/sets/" + setId);

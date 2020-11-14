@@ -26,3 +26,18 @@ public class Action
     public string setId { get; set; }
     public string response { get; set; }
 }
+
+public class RoomAPI
+{
+    public List<string> playerIds { get; set; }
+    public string roomId { get; set; }
+}
+
+public class PlayerAPI
+{
+    public string playerId { get; set; }
+    public string playerName { get; set; }
+    public string ELO { get; set; }
+    public string gameCount { get; set; }
+    public string victoriesCount { get; set; }
+}

@@ -156,11 +156,11 @@ RectTransform:
   m_Father: {fileID: 105038838}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 288.80655, y: -280.70572}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.0005493164}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &39674144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3722,13 +3722,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4965,7 +4959,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283844386}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -5011,6 +5005,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20593116b4b2fed4692126de18df9615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyGameMode: {fileID: 0}
+  MyDCDL_API_Handler: {fileID: 0}
+  Dropdown: {fileID: 0}
+  EloText: {fileID: 0}
+  VictoriesText: {fileID: 0}
+  GameCountText: {fileID: 0}
 --- !u!1001 &1296253023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9086,7 +9086,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: 
 --- !u!222 &2030912313
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10260,7 +10260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700270675258665617, guid: c67d1e2a97dc9114ba8d275b325e008b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 577.6131
+      value: 794.5675
       objectReference: {fileID: 0}
     - target: {fileID: 7700270675258665617, guid: c67d1e2a97dc9114ba8d275b325e008b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -10284,11 +10284,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700270675258665617, guid: c67d1e2a97dc9114ba8d275b325e008b, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7700270675258665617, guid: c67d1e2a97dc9114ba8d275b325e008b, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7700270675268430450, guid: c67d1e2a97dc9114ba8d275b325e008b, type: 3}
       propertyPath: m_Text
