@@ -41,19 +41,19 @@ jobs:
         with:
           unityVersion: 2020.1.6f1
           targetPlatform: WebGL
-          buildName: DCDL
+          buildName: DCDL-build
           
       - name: copy web.config file
         uses: canastro/copy-file-action@master
         with:
           source: "web.config"
-          target: "build/WebGL/DCDL/web.config"
+          target: "build/WebGL/DCDL-build/web.config"
 
       #- name : Remove wrong index.html
       #  run : sudo rm ./build/WebGL/WebGL/index.html
 
       - name : Add web components
-        run : sudo \cp -rf -v ./website/* ./build/WebGL/DCDL/
+        run : sudo \cp -rf -v ./website/* ./build/WebGL/DCDL-build/
         
       # Output
       - uses: actions/upload-artifact@v1
@@ -74,4 +74,4 @@ jobs:
           app-name: 'dcdlunity'
           slot-name: 'production'
           publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-          package: build/WebGL/DCDL/
+          package: build/WebGL/DCDL-build/
