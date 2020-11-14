@@ -51,7 +51,7 @@ jobs:
       - name : Add web components
         run : ls
         
-      - run : sudo cp -r -v -i ./website/ ./build/WebGL/WebGL/
+      - run : sudo cp -r -v -i ./website/* ./build/WebGL/WebGL/
 
       # Output
       - uses: actions/upload-artifact@v1
