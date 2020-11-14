@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +9,7 @@ public class Room : MonoBehaviour
     public GameMode MyGameMode;
     public DCDL_API_handler MyDCDL_API_Handler;
 
-    public GameObject ButtonReconnect;
+    public Button ButtonReconnect;
 
     //chat
     public InputField InputMessageToSend;
@@ -50,6 +46,8 @@ public class Room : MonoBehaviour
                 Text playerMessage = gameObjectMessage.transform.GetChild(1).GetChild(1).GetComponent<Text>();
                 playerName.text = list[0];
                 playerMessage.text = list[1];
+                if(list[0] == "Bertrand Renard")
+                    playerMessage.fontStyle = FontStyle.Bold;
             }
             PendingMessages.Clear();
             LayoutRebuilder.ForceRebuildLayoutImmediate(ContainerMessages.GetComponent<RectTransform>());
@@ -141,25 +139,35 @@ public class Room : MonoBehaviour
                 message += "c'est du beau travail !";
             }
 
-            GameObject gameObjectMessage = Instantiate(PrefabMessage, ContainerMessages.transform);
-            Text bertrandName = gameObjectMessage.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-            Text bertrandMessage = gameObjectMessage.transform.GetChild(1).GetChild(1).GetComponent<Text>();
-            bertrandMessage.fontStyle = FontStyle.Bold;
-            bertrandName.text = "Bertrand Renard";
-            bertrandMessage.text = message;
+            DisplayChatMessage("Bertrand Renard", message);
+
+            //GameObject gameObjectMessage = Instantiate(PrefabMessage, ContainerMessages.transform);
+            //Text bertrandName = gameObjectMessage.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+            //Text bertrandMessage = gameObjectMessage.transform.GetChild(1).GetChild(1).GetComponent<Text>();
+            //bertrandMessage.fontStyle = FontStyle.Bold;
+            //bertrandName.text = "Bertrand Renard";
+            //bertrandMessage.text = message;
 
         }
     }
     public async void ReconnectRoom()
     {
         bool success = await MyDCDL_API_Handler.ConnectPlayerToRoom(MyGameMode.PlayerId, MyGameMode.Password, MyGameMode.CurrentRoom);
-        if(success)
-        ButtonReconnect.SetActive(false);
+        if (success)
+            ButtonReconnect.interactable = false;
+        DisplayChatMessage("Bertrand Renard", "C'est reparti !");
+    }
+
+    public void ShareRoom()
+    {
+        DisplayChatMessage("Bertrand Renard", "Le code de cette salle est " + MyGameMode.CurrentRoom);
+        GUIUtility.systemCopyBuffer =MyGameMode.CurrentRoom;
     }
 
     public void Stop()
     {
-        ButtonReconnect.SetActive(true);
+        ButtonReconnect.interactable = true;
+        DisplayChatMessage("Bertrand Renard", "Cette partie a l'air inactive. Quand vous voudrez jouer à nouveau, cliquez dans le coin en haut à gauche.");
     }
 
     public async void SendChatMessage()
