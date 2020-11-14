@@ -52,7 +52,7 @@ jobs:
       #  run : sudo rm ./build/WebGL/WebGL/index.html
 
       - name : Add web components
-        run : sudo \cp -r -v -i ./website/* ./build/WebGL/WebGL/
+        run : sudo \cp -rf -v ./website/* ./build/WebGL/WebGL/
         
       # Output
       - uses: actions/upload-artifact@v1
