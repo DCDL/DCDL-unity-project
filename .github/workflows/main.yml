@@ -48,11 +48,12 @@ jobs:
           source: "web.config"
           target: "build/WebGL/WebGL/web.config"
 
-      - name : Add web components
-        run : ls
-        
-      - run : sudo cp -r -v -i ./website/* ./build/WebGL/WebGL/
+      #- name : Remove wrong index.html
+      #  run : sudo rm ./build/WebGL/WebGL/index.html
 
+      - name : Add web components
+        run : sudo \cp -r -v -i ./website/* ./build/WebGL/WebGL/
+        
       # Output
       - uses: actions/upload-artifact@v1
         with:
