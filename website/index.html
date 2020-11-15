@@ -72,53 +72,82 @@
     };
     document.body.appendChild(script);
 
-    function ConnectWebSocket(endpoint)
-    {
-      //window.alert("WORKING~!");
-      socket = io(endpoint);
-      socket.on('connect', function(){    
-      //window.alert("CONNECTED TO WEBSOCKET~!");});
-      socket.on('dcdl', function(data)
-      {    
-        //window.alert("Message received from dcdl : ~!" + data.toString());
-        _unityInstance.SendMessage(GameMode, 'WebSocketReceivedDCDL', data.toString());
-      });
-      socket.on('connection', function(data)
-      {    
-        //window.alert("Message received from dcdl : ~!" + data.toString());
-        _unityInstance.SendMessage(GameMode, 'WebSocketReceivedCONNECTION', data.toString());
-      });
-      socket.on('GameAvailable', function(data)
-      {    
-        //window.alert("Message received from dcdl : ~!" + data.toString());
-        _unityInstance.SendMessage(GameMode, 'WebSocketReceivedGAMEAVAILABLE', data.toString());
-      });
-      socket.on('stop', function(data)
-      {    
-        //window.alert("Message received from dcdl : ~!" + data.toString());
-        _unityInstance.SendMessage(GameMode, 'WebSocketReceivedSTOP', data.toString());
-      });
-      socket.on('clientchat', function(data)
-      {    
-        _unityInstance.SendMessage(GameMode, 'WebSocketReceivedCLIENTCHAT', data.toString());
-      });
-      socket.on('GameOver', function(data)
-      {    
-        //window.alert("Message received from dcdl : ~!" + data.toString());
-        _unityInstance.SendMessage(GameMode, 'WebSocketReceivedGAMEOVER', data.toString());
-      });
-      socket.on('Idle', function(data)
-      {    
-        //window.alert("Message received from dcdl : ~!" + data.toString());
-        _unityInstance.SendMessage(GameMode, 'WebSocketReceivedIDLE', data.toString());
-      });
-    })
-  }
+    //function ConnectWebSocketJS(endpoint)
+    //{
+    //window.alert("WORKING~!");
+    socket = io('https://dcdlbackend.azurewebsites.net');
+    socket.on('connect', function(){    
+    //window.alert("CONNECTED TO WEBSOCKET~!");});
+    socket.on('dcdl', function(data)
+    {    
+      //window.alert("Message received from dcdl : ~!" + data.toString());
+      _unityInstance.SendMessage(GameMode, 'WebSocketReceivedDCDL', data.toString());
+    });
+    socket.on('connection', function(data)
+    {    
+      //window.alert("Message received from dcdl : ~!" + data.toString());
+      _unityInstance.SendMessage(GameMode, 'WebSocketReceivedCONNECTION', data.toString());
+    });
+    socket.on('GameAvailable', function(data)
+    {    
+      //window.alert("Message received from dcdl : ~!" + data.toString());
+      _unityInstance.SendMessage(GameMode, 'WebSocketReceivedGAMEAVAILABLE', data.toString());
+    });
+    socket.on('stop', function(data)
+    {    
+      //window.alert("Message received from dcdl : ~!" + data.toString());
+      _unityInstance.SendMessage(GameMode, 'WebSocketReceivedSTOP', data.toString());
+    });
+    socket.on('clientchat', function(data)
+    {    
+      _unityInstance.SendMessage(GameMode, 'WebSocketReceivedCLIENTCHAT', data.toString());
+    });
+    socket.on('GameOver', function(data)
+    {    
+      //window.alert("Message received from dcdl : ~!" + data.toString());
+      _unityInstance.SendMessage(GameMode, 'WebSocketReceivedGAMEOVER', data.toString());
+    });
+    socket.on('Idle', function(data)
+    {    
+      //window.alert("Message received from dcdl : ~!" + data.toString());
+      _unityInstance.SendMessage(GameMode, 'WebSocketReceivedIDLE', data.toString());
+    });
+    )
+  //}
 
-  function EmitMessage(title, message){
+  function EmitMessageJS(title, message){
     socket.emit(title, message)
   }
 
-</script>
+  function CopyToClipboardJS(content){
+    var tmpElem = $('<div>');
+    tmpElem.css({
+      position: "absolute",
+      left:     "-1000px",
+      top:      "-1000px",
+    });
+    // Add the input value to the temp element.
+    tmpElem.text(content);
+    $("body").append(tmpElem);
+    // Select temp element.
+    range.selectNodeContents(tmpElem.get(0));
+    selection = window.getSelection ();
+    selection.removeAllRanges ();
+    selection.addRange (range);
+    // Lets copy.
+    try { 
+      success = document.execCommand ("copy", false, null);
+    }
+    catch (e) {
+      copyToClipboardFF(input.val());
+    }
+    if (success) {
+      alert ("The text is on the clipboard, try to paste it!");
+      // remove temp element.
+      tmpElem.remove();
+    }  
+  }
+
+  </script>
 </body>
 </html>

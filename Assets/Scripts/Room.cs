@@ -1,12 +1,17 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Room : MonoBehaviour
 {
     public GameMode MyGameMode;
+
+    [DllImport("__Internal")]
+    private static extern void CopyToClipboard(string content);
+
     public DCDL_API_handler MyDCDL_API_Handler;
 
     public Button ButtonReconnect;
@@ -161,7 +166,7 @@ public class Room : MonoBehaviour
     public void ShareRoom()
     {
         DisplayChatMessage("Bertrand Renard", "Le code de cette salle est " + MyGameMode.CurrentRoom);
-        GUIUtility.systemCopyBuffer =MyGameMode.CurrentRoom;
+        CopyToClipboard(MyGameMode.CurrentRoom);
     }
 
     public void Stop()

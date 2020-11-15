@@ -20,8 +20,9 @@ public class DCDL_API_handler : MonoBehaviour
 {
     [DllImport("__Internal")]
     private static extern void EmitMessage(string title, string message);
-    [DllImport("__Internal")]
-    private static extern void ConnectWebSocket(string endpoint);
+
+    //[DllImport("__Internal")]
+    //private static extern void ConnectWebSocket(string endpoint);
 
     public GameMode MyGameMode;
 
@@ -45,7 +46,7 @@ public class DCDL_API_handler : MonoBehaviour
         else
             Endpoint = "http://localhost:8080";
 
-        ConnectWebSocket(Endpoint);
+        //ConnectWebSocket(Endpoint);
     }
 
     // Update is called once per frame
@@ -134,7 +135,6 @@ public class DCDL_API_handler : MonoBehaviour
     {
         SendMessageToSocket("disconnect","206");
         Debug.LogError("Destroying the socket.");
-        //Socket.Disconnect();
     }
 
     public async Task<bool> ConnectPlayerToRoom(string playerId, string passwword, string roomId)
