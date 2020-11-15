@@ -112,6 +112,7 @@
       //window.alert("Message received from dcdl : ~!" + data.toString());
       _unityInstance.SendMessage(GameMode, 'WebSocketReceivedIDLE', data.toString());
     });
+  })
 
     function EmitMessageJS(title, message){
       socket.emit(title, message)
