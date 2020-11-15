@@ -119,6 +119,10 @@
     }
 
     function CopyToClipboardJS(content){
+      var success   = true,
+      range     = document.createRange(),
+      selection;
+
       var tmpElem = $('<div>');
       tmpElem.css({
         position: "absolute",

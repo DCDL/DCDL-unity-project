@@ -67,8 +67,6 @@ public class Room : MonoBehaviour
 
     public async void NewGame(string nextSetId)
     {
-        ContainerSetParts.SetActive(true);
-
         //First, get this new game.
         Debug.LogError("Setting up a new game.");
         MyGameMode.CurrentSet = nextSetId;
@@ -101,6 +99,9 @@ public class Room : MonoBehaviour
         {
             SetParts[i].SetActive(NeedToShow4MoreParts);
         }
+
+        //show the whole thing
+        ContainerSetParts.SetActive(true);
     }
 
     public async void ConcludeSet()

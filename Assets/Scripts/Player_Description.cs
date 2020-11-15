@@ -38,6 +38,10 @@ public class Player_Description : MonoBehaviour
             Players.Add(player);
             Dropdown.AddOptions(new List<string> { playerId });
         }
+
+        if(room.playerIds.Count > 1)
+        Dropdown.value = 1;
+        Dropdown.onValueChanged.Invoke(1);
     }
 
     public void HidePlayerDescription()
