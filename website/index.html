@@ -112,20 +112,18 @@
       //window.alert("Message received from dcdl : ~!" + data.toString());
       _unityInstance.SendMessage(GameMode, 'WebSocketReceivedIDLE', data.toString());
     });
-    )
-  //}
 
-  function EmitMessageJS(title, message){
-    socket.emit(title, message)
-  }
+    function EmitMessageJS(title, message){
+      socket.emit(title, message)
+    }
 
-  function CopyToClipboardJS(content){
-    var tmpElem = $('<div>');
-    tmpElem.css({
-      position: "absolute",
-      left:     "-1000px",
-      top:      "-1000px",
-    });
+    function CopyToClipboardJS(content){
+      var tmpElem = $('<div>');
+      tmpElem.css({
+        position: "absolute",
+        left:     "-1000px",
+        top:      "-1000px",
+      });
     // Add the input value to the temp element.
     tmpElem.text(content);
     $("body").append(tmpElem);
@@ -148,6 +146,6 @@
     }  
   }
 
-  </script>
+</script>
 </body>
 </html>
