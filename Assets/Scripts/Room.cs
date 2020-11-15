@@ -167,7 +167,7 @@ public class Room : MonoBehaviour
     public void ShareRoom()
     {
         DisplayChatMessage("Bertrand Renard", "Le code de cette salle est " + MyGameMode.CurrentRoom);
-        //CopyToClipboard(MyGameMode.CurrentRoom);
+        CopyToClipboard(MyGameMode.CurrentRoom);
     }
 
     public void Stop()

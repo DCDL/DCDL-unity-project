@@ -975,12 +975,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
-    m_Right: 10
-    m_Top: 10
-    m_Bottom: 0
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
   m_ChildAlignment: 7
-  m_Spacing: 10
+  m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_Spacing: 5
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
@@ -4032,6 +4032,10 @@ PrefabInstance:
     - target: {fileID: 4788605167950722156, guid: 551cc5568a4f63640969afb149479893, type: 3}
       propertyPath: m_Name
       value: spacer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057178255498992121, guid: 551cc5568a4f63640969afb149479893, type: 3}
+      propertyPath: m_FlexibleHeight
+      value: 2000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 551cc5568a4f63640969afb149479893, type: 3}
