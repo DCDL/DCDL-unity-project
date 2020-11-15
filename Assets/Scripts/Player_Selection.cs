@@ -15,7 +15,7 @@ public class Player_Selection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<Canvas>().enabled = false;
+
     }
 
     // Update is called once per frame

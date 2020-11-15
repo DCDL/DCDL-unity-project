@@ -18,6 +18,7 @@ public class Player_Description : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<Canvas>().enabled = false;
         Players = new List<PlayerAPI>();
         Dropdown.onValueChanged.AddListener(delegate
         {
