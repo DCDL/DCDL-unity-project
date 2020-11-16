@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
   <script src="/socket.io/socket.io.js"></script>    
+  <script src="/node_modules/sweetalert/dist/sweetalert.min.js"></script>    
 </head>
 <body>
   <div id="unity-container" class="unity-desktop">
@@ -123,7 +124,7 @@
     function CopyToClipboardJS(content){
       navigator.clipboard.writeText(content)
       .then(() => {
-        swal('Text copied to clipboard');
+        swal('Votre numéro de salle ' + content + ' a été copié.');
       })
       .catch(err => {
         swal('Error in copying text: ', err);

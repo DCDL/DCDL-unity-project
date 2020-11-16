@@ -71,6 +71,7 @@ public class Room : MonoBehaviour
         if (IsRunnerStopped)
         {
             IsRunnerStopped = false;
+            DisplayChatMessage("Bertrand Renard", "Cette partie a l'air inactive. Quand vous voudrez jouer à nouveau, cliquez dans le coin en haut à gauche.");
             ButtonReconnect.interactable = true;
         }
     }
@@ -176,7 +177,7 @@ public class Room : MonoBehaviour
 
     public void ShareRoom()
     {
-        DisplayChatMessage("Bertrand Renard", "Le code de cette salle est " + MyGameMode.CurrentRoom);
+        //DisplayChatMessage("Bertrand Renard", "Le code de cette salle est " + MyGameMode.CurrentRoom);
         CopyToClipboard(MyGameMode.CurrentRoom);
     }
 
@@ -184,7 +185,6 @@ public class Room : MonoBehaviour
     {
         Debug.Log("Stopping the runner for this room.");
         IsRunnerStopped = true;
-        DisplayChatMessage("Bertrand Renard", "Cette partie a l'air inactive. Quand vous voudrez jouer à nouveau, cliquez dans le coin en haut à gauche.");
         return;
     }
 
