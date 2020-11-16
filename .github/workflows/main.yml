@@ -43,14 +43,15 @@ jobs:
           targetPlatform: WebGL
           buildName: DCDL-build
 
-      - name: actions/setup-node
-        uses: actions/setup-node@v1.4.1
-        with:
-          node-version: "13.9.0"
+      - name: Set Node.js 12.x
+      uses: actions/setup-node@master
+      with:
+        version: 12.x
 
-      - name: npm install
+      - name: Install dependencies
         working-directory: ./website
-        uses: jaid/action-npm-install@v1.2.1
+        run: |
+          npm install
 
       - name : Add web components
         run : sudo \cp -rf -v ./website/* ./build/WebGL/DCDL-build/
