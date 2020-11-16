@@ -27,7 +27,6 @@ public class Room : MonoBehaviour
     private List<GameObject> SetParts;   //10 for letters, 6 for numbers (so 4 will be hidden)
     public GameObject NumbersObjective;
 
-    bool IsRunnerStopped = false;
 
 
     // Start is called before the first frame update
@@ -66,13 +65,6 @@ public class Room : MonoBehaviour
         {
             if (InputMessageToSend.text != "")
                 SendChatMessage();
-        }
-
-        if (IsRunnerStopped)
-        {
-            IsRunnerStopped = false;
-            DisplayChatMessage("Bertrand Renard", "Cette partie a l'air inactive. Quand vous voudrez jouer à nouveau, cliquez dans le coin en haut à gauche.");
-            ButtonReconnect.interactable = true;
         }
     }
 
@@ -184,7 +176,8 @@ public class Room : MonoBehaviour
     public void Stop()
     {
         Debug.Log("Stopping the runner for this room.");
-        IsRunnerStopped = true;
+        DisplayChatMessage("Bertrand Renard", "Cette partie a l'air inactive. Quand vous voudrez jouer à nouveau, cliquez dans le coin en haut à gauche.");
+        ButtonReconnect.interactable = true;
         return;
     }
 

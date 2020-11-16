@@ -33,6 +33,7 @@ public class DCDL_API_handler : MonoBehaviour
     private bool IsInNeedOfReconnexion = false;
     private bool IsAbleToReconnect = false;
     private bool IsSetFinished = false;
+    bool IsRunnerStopped = false;
 
     private string Endpoint;
     private bool IsLocal = false;
@@ -78,6 +79,13 @@ public class DCDL_API_handler : MonoBehaviour
         {
             IsSetFinished = false;
             MyGameMode.MyRoom.ConcludeSet();
+        }
+
+        if (IsRunnerStopped)
+        {
+            IsRunnerStopped = false;
+            Debug.Log("There will be no more game. Bertrand should warn the users...");
+            MyGameMode.MyRoom.Stop();
         }
     }
 
@@ -125,7 +133,6 @@ public class DCDL_API_handler : MonoBehaviour
     void WebSocketReceivedSTOP(string data)
     {
         Debug.LogError("STOP received from the websocket : " + data);
-        MyGameMode.MyRoom.Stop();
     }
     void WebSocketReceivedIDLE(string data)
     {
