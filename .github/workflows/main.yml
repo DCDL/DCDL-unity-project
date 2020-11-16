@@ -42,15 +42,15 @@ jobs:
           unityVersion: 2020.1.6f1
           targetPlatform: WebGL
           buildName: DCDL-build
-          
-      - name: copy web.config file
-        uses: canastro/copy-file-action@master
-        with:
-          source: "web.config"
-          target: "build/WebGL/DCDL-build/web.config"
 
-      #- name : Remove wrong index.html
-      #  run : sudo rm ./build/WebGL/WebGL/index.html
+      - name: actions/setup-node
+        uses: actions/setup-node@v1.4.1
+        with:
+          node-version: "13.9.0"
+
+      - name: npm install
+        working-directory: ./website
+        uses: jaid/action-npm-install@v1.2.1
 
       - name : Add web components
         run : sudo \cp -rf -v ./website/* ./build/WebGL/DCDL-build/

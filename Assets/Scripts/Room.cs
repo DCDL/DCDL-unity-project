@@ -197,6 +197,7 @@ public class Room : MonoBehaviour
         //Debug.LogError("Sending message : " + data);
         MyDCDL_API_Handler.SendMessageToSocket("serverchat", data);
         await MyDCDL_API_Handler.SendAction(MyGameMode.CurrentSet, playerId, message);
+        InputMessageToSend.Select();
 
     }
 

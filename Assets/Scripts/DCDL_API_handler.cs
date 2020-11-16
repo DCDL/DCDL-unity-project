@@ -56,6 +56,7 @@ public class DCDL_API_handler : MonoBehaviour
         {
             IsAllowedToConnect = false;
             MyGameMode.SwitchCanvas(GameMode.GameCanvas.ROOM);
+            MyGameMode.MyRoom.InputMessageToSend.Select();
             //Debug.LogError("Starting room " + MyGameMode.CurrentRoom + " for player " + MyGameMode.PlayerId);
         }
 

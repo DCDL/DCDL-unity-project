@@ -24,6 +24,8 @@
     </div>
   </div>
   <script>
+    import swal from 'sweetalert';
+
     var socket
     var _unityInstance
     var GameMode = 'GameMode'
@@ -121,10 +123,10 @@
     function CopyToClipboardJS(content){
       navigator.clipboard.writeText(content)
       .then(() => {
-        alert('Text copied to clipboard');
+        swal('Text copied to clipboard');
       })
       .catch(err => {
-        alert('Error in copying text: ', err);
+        swal('Error in copying text: ', err);
       });  
     }
   </script>

@@ -31,7 +31,6 @@ public class Player_Description : MonoBehaviour
     public async void DisplayPlayerDescription()
     {
         Players.Clear();
-        gameObject.GetComponent<Canvas>().enabled = true;
         RoomAPI room = await MyDCDL_API_Handler.GetRoom(MyGameMode.CurrentRoom);
         foreach (string playerId in room.playerIds)
         {
@@ -40,9 +39,12 @@ public class Player_Description : MonoBehaviour
             Dropdown.AddOptions(new List<string> { playerId });
         }
 
-        if(room.playerIds.Count > 1)
-        Dropdown.value = 1;
-        Dropdown.onValueChanged.Invoke(1);
+        if (room.playerIds.Count >0 )
+        {
+            Dropdown.value = 1;
+            Dropdown.onValueChanged.Invoke(1);
+            gameObject.GetComponent<Canvas>().enabled = true;
+        }
     }
 
     public void HidePlayerDescription()
@@ -53,9 +55,9 @@ public class Player_Description : MonoBehaviour
     private void DropdownValueChangedHandler(Dropdown target)
     {
         Debug.Log("selected: " + Dropdown.options[Dropdown.value].text);
-        foreach(PlayerAPI player in Players)
+        foreach (PlayerAPI player in Players)
         {
-            if(player.playerId == Dropdown.options[Dropdown.value].text)
+            if (player.playerId == Dropdown.options[Dropdown.value].text)
             {
                 EloText.text = player.ELO;
                 VictoriesText.text = player.victoriesCount;
